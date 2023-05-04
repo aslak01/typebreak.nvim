@@ -27,8 +27,7 @@ local local_dictionary = false
 
 reset_state()
 
-function M.start(use_local_dictionary)
-	local_dictionary = use_local_dictionary or false
+function M.start()
 	reset_state()
 
 	local ui = api.nvim_list_uis()[1]
@@ -67,22 +66,22 @@ function M.fetch_new_lines()
 	M.offsets = {}
 	M.memory = ""
 
-	if local_dictionary then
-		M.words = dictionary.pick_random_words(N_WORDS)
-	else
-		local response = curl.get("https://random-word-api.herokuapp.com/word?number=" .. N_WORDS)
-		if response == nil then
-			print("could not fetch words from herokuapp.com")
-			return
-		end
-		local body = response.body
-		local delimiter = ","
-		for match in (body .. delimiter):gmatch("(.-)" .. delimiter) do
-			match = string.gsub(match, "%W", "")
-			table.insert(M.words, match)
-			table.insert(M.highlight_starts, false)
-		end
-	end
+	-- if local_dictionary then
+	M.words = dictionary.pick_random_words(N_WORDS)
+	-- else
+	-- 	local response = curl.get("https://random-word-api.herokuapp.com/word?number=" .. N_WORDS)
+	-- 	if response == nil then
+	-- 		print("could not fetch words from herokuapp.com")
+	-- 		return
+	-- 	end
+	-- 	local body = response.body
+	-- 	local delimiter = ","
+	-- 	for match in (body .. delimiter):gmatch("(.-)" .. delimiter) do
+	-- 		match = string.gsub(match, "%W", "")
+	-- 		table.insert(M.words, match)
+	-- 		table.insert(M.highlight_starts, false)
+	-- 	end
+	-- end
 
 	for _, word in pairs(M.words) do
 		local length = string.len(word)
