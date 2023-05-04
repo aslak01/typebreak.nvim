@@ -48,4 +48,15 @@ M.read_file = function(filename)
 	return contents
 end
 
+M.read_file_lines = function(file)
+	if not M.file_exists(file) then
+		return {}
+	end
+	local lines = {}
+	for line in io.lines(file) do
+		lines[#lines + 1] = line
+	end
+	return lines
+end
+
 return M

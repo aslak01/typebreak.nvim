@@ -9,7 +9,7 @@ local hasDict = utils.file_exists(path)
 local local_dictionary = {}
 
 if hasDict then
-	local_dictionary = utils.read_file(path)
+	local_dictionary = utils.read_file_lines(path)
 else
 	local_dictionary = {
 		"code",
