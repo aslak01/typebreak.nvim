@@ -54,7 +54,7 @@ M.read_file_lines = function(file)
 	end
 	local lines = {}
 	for line in io.lines(file) do
-		lines[#lines + 1] = string.lower(line)
+		lines[#lines + 1] = line:lower()
 	end
 	return lines
 end
