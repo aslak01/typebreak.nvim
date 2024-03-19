@@ -59,15 +59,16 @@ M.read_file_lines = function(file)
 	return lines
 end
 
+M.get_script_dir = function()
+	local str = debug.getinfo(2, "S").source:sub(2)
+	return str:match("(.*/)")
+end
 
-M.get_pwd = function()
-	local handle = io.popen("pwd")
-	if handle == nil then
-		error("no pwd found")
-	end
-	local result = handle:read("*a")
-	handle:close()
-	return result:match("^%s*(.-)%s*$") -- Trim any whitespace from the result
+M.load_relative_file = function(relative_path)
+	local script_dir = M.get_script_dir()
+	local file_path = script_dir .. relative_path
+	local content = M.read_file_lines(file_path)
+	return content
 end
 
 return M

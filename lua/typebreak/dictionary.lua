@@ -2,20 +2,11 @@ local utils = require("typebreak.utils")
 
 local M = {}
 
-local currentDir = utils.get_pwd()
-
-local dictPath = currentDir .. "/dict"
-
 -- lines in `dict`
 local linecount = 235976
 
-local hasDict = utils.file_exists(dictPath)
-
-if not hasDict then
-	error("Dictionary not loaded")
-end
-
-local local_dictionary = utils.read_file_lines(dictPath)
+local local_dictionary = utils.load_relative_file("dict")
+-- local local_dictionary = utils.read_file_lines(dict)
 
 M.pick_random_words = function(n)
 	local picked = {}
