@@ -3,6 +3,7 @@ local M = {}
 local api = vim.api
 local state = require("typebreak.state")
 local dictionary = require("typebreak.dictionary")
+local keys = require("typebreak.consts.keys")
 
 local utils = require("typebreak.utils")
 
@@ -180,36 +181,6 @@ function M.key_pressed(key)
 end
 
 function M.set_mapping()
-	local keys = {
-		"a",
-		"b",
-		"c",
-		"d",
-		"e",
-		"f",
-		"g",
-		"h",
-		"i",
-		"j",
-		"k",
-		"l",
-		"m",
-		"n",
-		"o",
-		"p",
-		"q",
-		"r",
-		"s",
-		"t",
-		"u",
-		"v",
-		"w",
-		"x",
-		"y",
-		"z",
-		"<BS>",
-		"<CR>",
-	}
 	for _, letter in pairs(keys) do
 		vim.keymap.set("i", letter, function()
 			M.key_pressed(letter)
