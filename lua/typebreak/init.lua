@@ -23,8 +23,6 @@ local reset_state = function()
 	M.end_time = nil
 end
 
-local local_dictionary = false
-
 reset_state()
 
 function M.start()

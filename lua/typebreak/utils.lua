@@ -59,4 +59,15 @@ M.read_file_lines = function(file)
 	return lines
 end
 
+
+M.get_pwd = function()
+	local handle = io.popen("pwd")
+	if handle == nil then
+		error("no pwd found")
+	end
+	local result = handle:read("*a")
+	handle:close()
+	return result:match("^%s*(.-)%s*$") -- Trim any whitespace from the result
+end
+
 return M
