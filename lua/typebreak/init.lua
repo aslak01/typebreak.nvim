@@ -1,13 +1,12 @@
 local M = {}
 
 local api = vim.api
-local curl = require("plenary.curl")
 local state = require("typebreak.state")
 local dictionary = require("typebreak.dictionary")
 
 local utils = require("typebreak.utils")
 
-local N_WORDS = 10
+local N_WORDS = 14
 
 local reset_state = function()
 	M.round_done = false
@@ -66,23 +65,7 @@ function M.fetch_new_lines()
 	M.offsets = {}
 	M.memory = ""
 
-	-- if local_dictionary then
 	M.words = dictionary.pick_random_words(N_WORDS)
-	-- else
-	-- 	local response = curl.get("https://random-word-api.herokuapp.com/word?number=" .. N_WORDS)
-	-- 	if response == nil then
-	-- 		print("could not fetch words from herokuapp.com")
-	-- 		return
-	-- 	end
-	-- 	local body = response.body
-	-- 	local delimiter = ","
-	-- 	for match in (body .. delimiter):gmatch("(.-)" .. delimiter) do
-	-- 		match = string.gsub(match, "%W", "")
-	-- 		table.insert(M.words, match)
-	-- 		table.insert(M.highlight_starts, false)
-	-- 	end
-	-- end
-
 	for _, word in pairs(M.words) do
 		local length = string.len(word)
 		local before = math.random(0, M.width - length)
