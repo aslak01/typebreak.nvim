@@ -65,6 +65,7 @@ function M.fetch_new_lines()
 	M.memory = ""
 
 	M.words = dictionary.pick_random_words(N_WORDS)
+
 	for _, word in pairs(M.words) do
 		local length = string.len(word)
 		local before = math.random(0, M.width - length)

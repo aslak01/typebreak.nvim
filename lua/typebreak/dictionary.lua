@@ -3,15 +3,15 @@ local utils = require("typebreak.utils")
 local M = {}
 
 -- lines in `dict`
-local linecount = 235976
+local DICT_LINECOUNT = 235976
+local DICT_FN = "dict"
 
-local local_dictionary = utils.load_relative_file("dict")
--- local local_dictionary = utils.read_file_lines(dict)
+local local_dictionary = utils.load_relative_file(DICT_FN)
 
 M.pick_random_words = function(n)
 	local picked = {}
 	for _ = 1, n, 1 do
-		table.insert(picked, local_dictionary[math.random(1, linecount)])
+		table.insert(picked, local_dictionary[math.random(1, DICT_LINECOUNT)])
 	end
 	return picked
 end
